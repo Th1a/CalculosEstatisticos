@@ -1,0 +1,118 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.media;
+import java.util.*;
+
+/**
+ *
+ * @author Thiago
+ */
+public class Media {
+
+    public static void main(String[] args) {
+        
+        Scanner ler = new Scanner(System.in);
+        
+        System.out.println("Digite a quantidade de numeros:");
+        int n = ler.nextInt();
+        
+        int array[] = new int[n];
+        int soma = 0 ;
+        for(int i = 0 ;i < n ; i++){
+            
+            System.out.println("Digete os numero: " + (i+1));
+            array[i] = ler.nextInt();
+            soma +=array[i];
+            
+            }
+        
+            for (int i = 0; i < n - 1; i++) {
+             for (int j = 0; j < n - 1 - i; j++) {
+                if (array[j] > array[j + 1]) {
+                    // Troca de posições
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                    }
+                }
+            }
+             System.out.println("Sequência ordenada:");
+            for(int s = 0; s < n; s++){
+            System.out.println(array[s]);
+        }
+            int vezes = 0;
+            int  indicie = 0;
+             List<Integer> modas = new ArrayList<>();
+            int moda = array[0];
+            int maxRepeticoes = 0;
+
+        // Laço para encontrar a moda
+        for (int i = 0; i < n; i++) {
+            int contagemAtual = 0;
+            for (int j = 0; j < n; j++) {
+                if (array[i] == array[j]) {
+                    contagemAtual++;
+                }
+            }
+
+            // Verifica se a contagem atual é maior que a máxima encontrada
+           if (contagemAtual > maxRepeticoes) {
+                maxRepeticoes = contagemAtual;
+                modas.clear();  // Remove as modas anteriores
+                modas.add(array[i]);  // Adiciona o novo número mais frequente
+            } else if (contagemAtual == maxRepeticoes && !modas.contains(array[i])) {
+                modas.add(array[i]);  // Adiciona o número à lista de modas se for multimodal
+            }else{
+                System.out.println("Amodal");
+            }
+        }
+
+       
+      
+        
+        double mediana;
+        double central1 = 0;
+        double central2 = 0;
+        
+        if( n % 2 == 1){
+            mediana = array[n/2];              
+                        
+            }else{
+                central1 = array[n/2-1];
+                central2 = array[n/2];
+                System.out.println("Os numeros centrais sao : " +  central1 + " e " + central2);
+                mediana = (central1 + central2)/2.0;
+               
+                }
+         double media = (double) soma/n;
+        //variancia
+        double somaVariancia = 0;
+        for(int v :array){
+            somaVariancia += Math.pow(v - media, 2);
+        }
+        double resultadoVariancia;
+        resultadoVariancia = somaVariancia/n;
+        
+        double desvioDepadrao = 0;
+        desvioDepadrao = Math.sqrt(resultadoVariancia);
+        
+        
+        
+                     
+                      
+        
+        System.out.println("Soma = " + soma);
+        System.out.println("=======================================");
+        System.out.println("Media = " + media);
+        System.out.println("Moda = " + moda);
+        System.out.println("Mediana = " + mediana);
+        System.out.println("Variancia = " + resultadoVariancia);
+        System.out.println("Desvio de padrao = " + desvioDepadrao);
+         System.out.println("=======================================");
+      
+        
+    }
+
+}
